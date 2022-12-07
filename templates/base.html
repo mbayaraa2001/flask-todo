@@ -8,18 +8,22 @@
 </head>
 <body>
     <h1>Todo App</h1>
-    <form action="/add" method="post">
+    <form action="/todo_add" method="post">
         <div>
             <label for="todo_form">Todo Form</label>
-            <input type="text" name="Todo" placeholder="Enter your text">
+            <input type="text" name="todo_name" placeholder="What should be done" value="{{todo_name}}">
+            <input type="text" name="todo_comment" placeholder="Enter your comment" value="{{todo_comment}}">
+            <script> var localDate= document.write(new Date().toLocaleDateString()); </script>
+            <p>Todo job started at:<span id='localDate'></span>.</p>
             <br>
             <button type="submit">Add to List</button>
         </div>
     </form>
 
-
-    {% for todo in todo_list %}
+        {% for todo in todo_list %}
         <p>{{ todo.id }} |{{ todo.todo_form }}</p>
+        <p>print whats in List</p>
+        <p>{{ todo }} |{{ todo.todo_name }}</p>
         {% if todo.complete == False %}
             <span>Not completed</span>            
         {% else %}
