@@ -29,7 +29,7 @@ def todo_add():
         new_todo = Todo(todo_name = request.form.get("todo_name"), todo_comment = request.form.get("todo_comment"), todo_time = datetime.now(), todo_complete=False)
         db.session.add(new_todo)
         db.session.commit()
-        return "<p>requestPOST</p>"  
+        return redirect(url_for("index")) 
 
 
 if __name__=="__main__":
