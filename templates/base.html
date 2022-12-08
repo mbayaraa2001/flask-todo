@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Flask - SQLite</title>
 </head>
 <body>
     <h1>Todo App</h1>
@@ -19,18 +19,17 @@
             <button type="submit">Add to List</button>
         </div>
     </form>
-
-        {% for todo in todo_list %}
-        <p>{{ todo.id }} |{{ todo.todo_form }}</p>
-        <p>print whats in List</p>
-        <p>{{ todo }} |{{ todo.todo_name }}</p>
-        {% if todo.complete == False %}
+    <p>print whats in List</p>
+        {% for todo in return_todo_list %}        
+        <p>{{ todo.todo_id }} |{{ todo.todo_name }}</p>
+        {% if todo.todo_complete == False %}
             <span>Not completed</span>            
         {% else %}
-            <span>completed</span>
+            <span>completed </span>
         {% endif %}
         <a href="/">Update</a>
         <a href="/">Delete</a>
-    {% endfor %}
+        {% endfor %}
+    
 </body>
 </html>

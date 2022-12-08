@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Column, ForeignKey, Integer, String
 from datetime import datetime
@@ -20,7 +20,8 @@ class Todo(db.Model):
 def index():
     # print all todos
     todo_list = Todo.query.all()
-    return render_template('base.html')
+    print(todo_list)
+    return render_template('base.html', return_todo_list = todo_list)
 
 
 @app.route("/todo_add", methods=["POST", "GET"])
@@ -29,6 +30,7 @@ def todo_add():
         new_todo = Todo(todo_name = request.form.get("todo_name"), todo_comment = request.form.get("todo_comment"), todo_time = datetime.now(), todo_complete=False)
         db.session.add(new_todo)
         db.session.commit()
+        print(db.session.commit())
         return redirect(url_for("index")) 
 
 
