@@ -5,31 +5,34 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flask - SQLite</title>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.js"></script>
 </head>
 <body>
-    <h1>Todo App</h1>
+    <h1 class="ui header"></h1>>Todo App</h1>
     <form action="/todo_add" method="post">
-        <div>
-            <label for="todo_form">Todo Form</label>
+        <div class="ui input focus">
+            <label class="ui label" for="todo_form">Todo Form</label>
             <input type="text" name="todo_name" placeholder="What should be done" value="{{todo_name}}">
             <input type="text" name="todo_comment" placeholder="Enter your comment" value="{{todo_comment}}">
-            <script> var localDate= document.write(new Date().toLocaleDateString()); </script>
             <br>
-            <button type="submit">Add to List</button>
+            <button class="ui primary button" type="submit">Add to List</button>
         </div>
     </form>
     <h2>print whats in List:</h2>
+    <div class="ui segment">
         {% for todo in return_todo_list %}        
-        <p>{{ todo.todo_id }} |{{ todo.todo_name }}</p>
-        <p>{{todo.todo_time}}</p>
+        <p class="ui big header">{{ todo.todo_id }} |{{ todo.todo_name }}</p>
+        <p class="ui big header">{{todo.todo_time}}</p>
         {% if todo.todo_complete == False %}
             <span>Not completed</span>            
         {% else %}
             <span>completed </span>
         {% endif %}
-        <a href="/">Update</a>
-        <a href="/">Delete</a>
+        <a class="ui blue button" href="/update/{{ todo.todo_id }}">Update</a>
+        <a class="ui red button" href="/delete/{{ todo.todo_id }}">Delete</a>
         {% endfor %}
+    </div>
     
 </body>
 </html>

@@ -21,7 +21,6 @@ class Todo(db.Model):
 def index():
     # print all todos
     todo_list = Todo.query.all()
-    print(todo_list)
     return render_template('base.html', return_todo_list = todo_list)
 
 
@@ -34,6 +33,23 @@ def todo_add():
         flash('User Added','success')
         return redirect(url_for("index")) 
 
+@app.route("/update/<int:todo_id>")
+def todo_update(todo_id):
+    if request.method=="GET":           
+        todo = Todo.query.filter_by(todo_id =todo_id).first()
+        todo.todo_complete = not todo.todo_complete
+        print(todo.todo_complete)
+        db.session.commit()
+        return redirect(url_for("index")) 
+    
+@app.route("/delete/<int:todo_id>")
+def todo_delete(todo_id):
+    if request.method=="GET":       
+        todo = Todo.query.filter_by(todo_id =todo_id).first()
+        db.session.delete(todo)
+        db.session.commit()
+        return redirect(url_for("index")) 
+    
 
 if __name__=="__main__":
     with app.app_context():
