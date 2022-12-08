@@ -5,6 +5,7 @@ from datetime import datetime
 
 
 app = Flask(__name__)
+app.secret_key = 'asrtarstaursdlarsn'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=False
 db = SQLAlchemy(app)
@@ -30,7 +31,7 @@ def todo_add():
         new_todo = Todo(todo_name = request.form.get("todo_name"), todo_comment = request.form.get("todo_comment"), todo_time = datetime.now(), todo_complete=False)
         db.session.add(new_todo)
         db.session.commit()
-        print(db.session.commit())
+        flash('User Added','success')
         return redirect(url_for("index")) 
 
 

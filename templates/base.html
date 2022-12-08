@@ -14,14 +14,14 @@
             <input type="text" name="todo_name" placeholder="What should be done" value="{{todo_name}}">
             <input type="text" name="todo_comment" placeholder="Enter your comment" value="{{todo_comment}}">
             <script> var localDate= document.write(new Date().toLocaleDateString()); </script>
-            <p>Todo job started at:<span id='localDate'></span>.</p>
             <br>
             <button type="submit">Add to List</button>
         </div>
     </form>
-    <p>print whats in List</p>
+    <h2>print whats in List:</h2>
         {% for todo in return_todo_list %}        
         <p>{{ todo.todo_id }} |{{ todo.todo_name }}</p>
+        <p>{{todo.todo_time}}</p>
         {% if todo.todo_complete == False %}
             <span>Not completed</span>            
         {% else %}
